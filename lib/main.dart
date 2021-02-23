@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_setup/app/app.locator.dart';
+import 'package:stacked_setup/app/app.router.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  setupLocator();
   runApp(MyApp());
 }
 
@@ -18,7 +21,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      navigatorKey: StackedService.navigatorKey,
+      onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }
